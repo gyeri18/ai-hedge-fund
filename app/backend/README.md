@@ -92,11 +92,12 @@ app/backend/
 └── main.py                   # FastAPI application entry point
 ```
 
+## Troubleshooting
+
+- **Port already in use:** If port 8000 is occupied, start the server on an alternate port with `--port 8080`.
+- **Poetry not found after install:** Restart your shell or run `source ~/.profile` to pick up the updated PATH.
+- **Missing API keys:** The server will start without all keys set, but requests requiring a missing key will fail with a 500 error. Double-check your `.env` file.
+
 ## Disclaimer
 
-This project is for **educational and research purposes only**.
-
-- Not intended for real trading or investment
-- No warranties or guarantees provided
-- Creator assumes no liability for financial losses
-- Cons
+This project is for **educational and research purposes only**. It is not intended to be used as actual financial advice or for real trading. Always consult a qualified financial advisor before making investment decisions.
