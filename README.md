@@ -28,7 +28,7 @@ This system employs several agents working together:
 
 Note: the system does not actually make any trades.
 
-> **Personal note:** I forked this repo to study how multi-agent LLM systems can be applied to financial analysis. My main interest is in the value investing agents (Graham, Munger, Buffett) and how they weigh qualitative vs. quantitative signals.
+> **Personal note:** I forked this repo to study how multi-agent LLM systems can be applied to financial analysis. My main interest is in the value investing agents (Graham, Munger, Buffett) and how they weigh qualitative vs. quantitative signals. I'm particularly curious about how the agents handle contradictory signals — e.g., when fundamentals look strong but sentiment is bearish.
 
 [![Twitter Follow](https://img.shields.io/twitter/follow/virattt?style=social)](https://twitter.com/virattt)
 
@@ -45,10 +45,4 @@ This project is for **educational and research purposes only**.
 By using this software, you agree to use it solely for learning purposes.
 
 ## Table of Contents
-- [How to Install](#how-to-install)
-- [How to Run](#how-to-run)
-  - [⌨️ Command Line Interface](#️-command-line-interface)
-  - [🖥️ Web Application](#️-web-application)
-- [How to Contribute](#how-to-contribute)
-- [Feature Requests](#feature-requests)
-- [License](#licens
+- [How to Install](#
