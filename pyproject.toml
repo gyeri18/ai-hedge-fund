@@ -54,7 +54,8 @@ ignore = ["E501"]
 python_version = "3.11"
 warn_return_any = true
 warn_unused_configs = true
-disallow_untyped_defs = true
+# Relaxing this for personal exploration — too noisy when prototyping new agents
+disallow_untyped_defs = false
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
