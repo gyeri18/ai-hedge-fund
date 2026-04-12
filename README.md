@@ -36,12 +36,12 @@ Note: the system does not actually make any trades.
 
 See the original repo's setup instructions. For my own reference, the agents I'm most actively experimenting with are:
 - **Ben Graham** and **Warren Buffett** — to compare how margin-of-safety thresholds affect signal output
-- **Nassim Taleb** — to see how tail-risk weighting interacts with the Portfolio Manager's position sizing
-- **Fundamentals vs. Sentiment** — running both on the same ticker to observe how often they disagree and by how much
+- **Nassim Taleb** — to see how tail-risk weighting interacts with the other agents' bullish signals
+- **Fundamentals vs. Sentiment** — running both on the same ticker to observe when they diverge and by how much
 
 ## My Experiment Log
 
-| Date | Tickers | Agents Used | Notes |
-|------|---------|-------------|-------|
-| 2025-04-01 | AAPL, MSFT | Graham, Buffett, Fundamentals | Graham more conservative; Buffett bullish on MSFT moat |
-| 2025-04-08 | META | Taleb, Sentiment, Technicals | Taleb flagged downside tail risk despite bullish sentiment |
+| Date | Ticker | Agents Used | Observation |
+|------|--------|-------------|-------------|
+| 2025-04-01 | AAPL | Graham, Buffett, Sentiment | Graham bearish (P/B too high), Buffett bullish — interesting split |
+| 2025-04-03 | BRK.B | Munger, Fundamentals | Strong buy consensus, as expected |
