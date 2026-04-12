@@ -98,5 +98,5 @@ app/backend/
   ```bash
   poetry run uvicorn main:app --reload --port 8001
   ```
-- **Missing API keys:** Ensure your `.env` file exists in the root directory and contains all required keys. The server will start without them but requests that rely on LLM calls will fail.
-- **Poetry not found:** Make sure the Poetry install directory (usually `~/.local/bin`) is on your `PATH`.
+- **Poetry not found:** Make sure `~/.local/bin` is in your `PATH` after installing Poetry.
+- **Missing API keys:** Double-check that your `.env` file is in the root directory (not inside `app/backend/`) and that all required keys are set.
