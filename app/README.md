@@ -104,11 +104,8 @@ OPENAI_API_KEY=your-openai-api-key
 # For running LLMs hosted by groq (deepseek, llama3, etc.)
 GROQ_API_KEY=your-groq-api-key
 
-# For getting financial data (required)
+# For getting financial data (required for stock price and fundamentals)
 FINANCIAL_DATASETS_API_KEY=your-financial-datasets-api-key
-
-# Optional: For Anthropic Claude models
-ANTHROPIC_API_KEY=your-anthropic-api-key
 ```
 
-> **Note (personal):** I've found that setting at least `OPENAI_API_KEY` and `FINANCIAL_DATASETS_API_KEY` is enough to get started with the default agents. The other keys are only needed if you want to use alternative LLM providers.
+> **Note:** At minimum you need an `OPENAI_API_KEY` to run the default agents. The `FINANCIAL_DATASETS_API_KEY` is required for fetching real stock data; without it you will only be able to use tickers that are available via the free tier.
