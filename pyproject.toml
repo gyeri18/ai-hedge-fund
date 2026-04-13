@@ -63,4 +63,5 @@ ignore_missing_imports = true
 testpaths = ["tests"]
 python_files = ["test_*.py"]
 python_functions = ["test_*"]
-addopts = "--cov=src --cov-report=term-missing"
+# Removed --cov-report=term-missing for faster local test runs; add it back for CI
+addopts = "--cov=src"
