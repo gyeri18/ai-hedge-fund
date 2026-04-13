@@ -98,5 +98,5 @@ app/backend/
   ```bash
   poetry run uvicorn main:app --reload --port 8001
   ```
-- **Poetry not found:** Make sure `~/.local/bin` is in your `PATH` after installing Poetry.
-- **Missing API keys:** Double-check that your `.env` file is in the root directory (not inside `app/backend/`) and that all required keys are set.
+- **Missing API keys:** Ensure your `.env` file exists in the root directory and contains all required keys.
+- **Poetry not found:** Make sure Poetry's bin directory is in your `PATH` after installation (restart your shell or run `source ~/.bashrc`).
