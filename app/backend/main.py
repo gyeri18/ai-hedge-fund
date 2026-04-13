@@ -1,55 +1,90 @@
+"""FastAPI backend for the AI Hedge Fund application.
+
+This module serves as the main entry point for the backend API,
+providing endpoints for portfolio analysis, stock data, and AI-driven
+investment recommendations.
+"""
+
+import os
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-import logging
-import asyncio
+from dotenv import load_dotenv
 
-from app.backend.routes import api_router
-from app.backend.database.connection import engine
-from app.backend.database.models import Base
-from app.backend.services.ollama_service import ollama_service
+load_dotenv()
 
-# Configure logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+# ---------------------------------------------------------------------------
+# Application lifespan
+# ---------------------------------------------------------------------------
 
-app = FastAPI(title="AI Hedge Fund API", description="Backend API for AI Hedge Fund", version="0.1.0")
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Handle startup and shutdown events."""
+    # Startup
+    print("Starting AI Hedge Fund backend...")
+    yield
+    # Shutdown
+    print("Shutting down AI Hedge Fund backend...")
 
-# Initialize database tables (this is safe to run multiple times)
-Base.metadata.create_all(bind=engine)
 
-# Configure CORS
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],  # Frontend URLs
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+# ---------------------------------------------------------------------------
+# App factory
+# ---------------------------------------------------------------------------
 
-# Include all routes
-app.include_router(api_router)
+def create_app() -> FastAPI:
+    """Create and configure the FastAPI application instance."""
+    app = FastAPI(
+        title="AI Hedge Fund API",
+        description=(
+            "Backend API for the AI Hedge Fund — providing portfolio analysis, "
+            "market data, and AI-driven investment signals."
+        ),
+        version="0.1.0",
+        lifespan=lifespan,
+    )
 
-@app.on_event("startup")
-async def startup_event():
-    """Startup event to check Ollama availability."""
-    try:
-        logger.info("Checking Ollama availability...")
-        status = await ollama_service.check_ollama_status()
-        
-        if status["installed"]:
-            if status["running"]:
-                logger.info(f"✓ Ollama is installed and running at {status['server_url']}")
-                if status["available_models"]:
-                    logger.info(f"✓ Available models: {', '.join(status['available_models'])}")
-                else:
-                    logger.info("ℹ No models are currently downloaded")
-            else:
-                logger.info("ℹ Ollama is installed but not running")
-                logger.info("ℹ You can start it from the Settings page or manually with 'ollama serve'")
-        else:
-            logger.info("ℹ Ollama is not installed. Install it to use local models.")
-            logger.info("ℹ Visit https://ollama.com to download and install Ollama")
-            
-    except Exception as e:
-        logger.warning(f"Could not check Ollama status: {e}")
-        logger.info("ℹ Ollama integration is available if you install it later")
+    # -----------------------------------------------------------------------
+    # CORS
+    # -----------------------------------------------------------------------
+    allowed_origins = os.getenv(
+        "ALLOWED_ORIGINS",
+        "http://localhost:3000,http://127.0.0.1:3000",
+    ).split(",")
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=allowed_origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+
+    # -----------------------------------------------------------------------
+    # Routers  (imported lazily so missing deps surface early)
+    # -----------------------------------------------------------------------
+    from app.backend.routers import health  # noqa: PLC0415
+
+    app.include_router(health.router, prefix="/api", tags=["health"])
+
+    return app
+
+
+# Module-level app instance used by uvicorn / gunicorn
+app = create_app()
+
+
+# ---------------------------------------------------------------------------
+# Dev entry point
+# ---------------------------------------------------------------------------
+
+if __name__ == "__main__":
+    import uvicorn
+
+    uvicorn.run(
+        "app.backend.main:app",
+        host=os.getenv("HOST", "0.0.0.0"),
+        port=int(os.getenv("PORT", "8000")),
+        reload=os.getenv("RELOAD", "true").lower() == "true",
+        log_level=os.getenv("LOG_LEVEL", "info"),
+    )
