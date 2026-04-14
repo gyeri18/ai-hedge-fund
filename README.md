@@ -37,12 +37,8 @@ Note: the system does not actually make any trades.
 See the original repo's setup instructions. For my own reference, the agents I'm most actively experimenting with are:
 - **Ben Graham** and **Warren Buffett** — to compare how margin-of-safety thresholds affect signal output
 - **Nassim Taleb** — to see how tail-risk weighting interacts with the Portfolio Manager's position sizing
-- **Charlie Munger** — curious whether his qualitative "moat" criteria meaningfully diverges from Buffett's signals on the same ticker
+- **Charlie Munger** — curious whether the qualitative "wonderful business" filter meaningfully diverges from Buffett's output on the same ticker
 
-## My Experiment Notes
+## Notes on Agent Disagreement
 
-| Agent | Ticker tested | Observation |
-|---|---|---|
-| Ben Graham | $KO | Flagged as overvalued vs. Graham's net-net threshold; interesting contrast with Buffett signal |
-| Nassim Taleb | $TSLA | Heavy tail-risk penalty; position size capped well below Portfolio Manager default |
-| Warren Buffett | $AAPL | Bullish; moat + earnings consistency scored high |
+One pattern I've noticed: Graham and Buffett frequently disagree on higher-P/E compounders (e.g., MSFT, AAPL). Graham tends to flag these as overvalued while Buffett's agent gives a buy signal. This is actually faithful to how their philosophies diverged historically, which is a good sign the prompts are well-calibrated.
