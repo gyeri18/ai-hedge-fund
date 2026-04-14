@@ -96,7 +96,7 @@ app/backend/
 
 - **Port already in use:** If port 8000 is occupied, start the server on a different port:
   ```bash
-  poetry run uvicorn main:app --reload --port 8001
+  poetry run uvicorn main:app --reload --port 8080
   ```
-- **Missing API keys:** Ensure your `.env` file exists in the root directory and contains all required keys.
-- **Poetry not found:** Make sure Poetry's bin directory is in your `PATH` after installation (restart your shell or run `source ~/.bashrc`).
+- **Missing API keys:** Double-check that your `.env` file exists in the root directory and contains all required keys.
+- **Poetry not found:** Make sure the Poetry install directory (usually `~/.local/bin`) is on your `PATH`.
