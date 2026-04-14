@@ -42,6 +42,9 @@ def create_app() -> FastAPI:
         ),
         version="0.1.0",
         lifespan=lifespan,
+        # Enable docs in all environments for personal/learning use
+        docs_url="/docs",
+        redoc_url="/redoc",
     )
 
     # -----------------------------------------------------------------------
@@ -49,7 +52,8 @@ def create_app() -> FastAPI:
     # -----------------------------------------------------------------------
     allowed_origins = os.getenv(
         "ALLOWED_ORIGINS",
-        "http://localhost:3000,http://127.0.0.1:3000",
+        # Added port 8080 as I sometimes run the frontend dev server there
+        "http://localhost:3000,http://127.0.0.1:3000,http://localhost:8080",
     ).split(",")
 
     app.add_middleware(
