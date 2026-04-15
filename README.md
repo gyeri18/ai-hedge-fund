@@ -37,8 +37,8 @@ Note: the system does not actually make any trades.
 See the original repo's setup instructions. For my own reference, the agents I'm most actively experimenting with are:
 - **Ben Graham** and **Warren Buffett** — to compare how margin-of-safety thresholds affect signal output
 - **Nassim Taleb** — to see how tail-risk weighting interacts with the Portfolio Manager's position sizing
-- **Charlie Munger** — curious whether the qualitative "wonderful business" filter meaningfully diverges from Buffett's output on the same ticker
+- **Charlie Munger** — curious whether his qualitative "moat" checks meaningfully override quantitative signals
 
-## Notes on Agent Disagreement
+## Notes on Contradictory Signals
 
-One pattern I've noticed: Graham and Buffett frequently disagree on higher-P/E compounders (e.g., MSFT, AAPL). Graham tends to flag these as overvalued while Buffett's agent gives a buy signal. This is actually faithful to how their philosophies diverged historically, which is a good sign the prompts are well-calibrated.
+One pattern I've noticed while experimenting: when Taleb's agent flags high tail risk but Graham/Buffett are bullish, the Portfolio Manager tends to reduce position size rather than flip to bearish. Worth digging into the risk weighting logic in `risk_manager.py` to understand why.
